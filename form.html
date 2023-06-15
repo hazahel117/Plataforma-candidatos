@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+        
+    </head>
+    <body>
+        <nav>
+            
+            <a href="https://gaip.mx" target="_blank" ><img class= logo src="src/logo.png" alt="" ></a>
+        </nav>
+        <div class="container">
+            <h1>Datos </h1>
+            <form method="post">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+                
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" pattern="[0-9]+" id="telefono" name="telefono" required>
+                
+                <label for="edad">Edad:</label>
+                <input type="number" id="edad" name="edad"  min="18" max="80" required>
+                
+                <label for="hijos">Casado</label>
+                <select id="opciones" name="opciones">
+                    <option value="opcion1">Sí</option>
+                    <option value="opcion2">No</option>
+                </select>
+                <label for="hijos">Con hijos</label>
+                <select id="opciones" name="opciones">
+                    <option value="opcion1">Sí</option>
+                    <option value="opcion2">No</option>
+                </select>
+                <label for="hijos">Titulado y con cédula</label>
+                <select id="opciones" name="opciones">
+                    <option value="opcion1">Sí</option>
+                    <option value="opcion2">No</option>
+                </select>
+                
+                <label for="">Especialidad:</label>
+                <select id="especialidades" name="especialidades" onchange="mostrarPreguntas()">
+                    <option value="opcion1">Ingeniero Hidráulico</option>
+                    <option value="opcion2">Ingeniero Estructurista</option>
+                </select>
+
+
+                <div class="pregunta" id="opcion1_pregunta">
+                    <label for="pregunta_opcion1">Pregunta para hidraulico</label>
+                    <input type="text" id="pregunta_opcion1" name="pregunta_opcion1">
+                </div>
+                  
+                <div class="pregunta" id="opcion2_pregunta">
+                    <label for="pregunta_opcion2">Pregunta para estructurista</label>
+                    <input type="text" id="pregunta_opcion2" name="pregunta_opcion2">
+                </div>
+
+
+                <label for="opciones">Manejo de Autocad:</label>
+                <select id="opciones" name="opciones">
+                    <option value="opcion1">Nulo</option>
+                    <option value="opcion2">Básico</option>
+                    <option value="opcion3">Medio</option>
+                    <option value="opcion4">Avanzado</option>
+                </select>
+
+                <label for="price">Expectativa económica </label>
+                <input type="range" name="price" id="price" min="1000" max="30000" step="100" value="10000">
+                <output class="price-output" for="price"></output>
+
+                <label for="archivo">Ingrese su currículum vitae:</label>
+                <input type="file" id="archivo" name="archivo" accept="application/pdf">
+
+                <input type="submit" value="Enviar">
+            </form>
+          </div>
+          <script src="./index.js"></script>
+    </body>
+</html>
+
+</body>
+</html>
