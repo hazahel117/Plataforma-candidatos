@@ -3,21 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style2.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-    <nav>
-            
-        <a href="https://gaip.mx" target="_blank" ><img class= logo src="src/logo.png" alt="" ></a>
-    </nav>
-    <div>
-        <label for="hidraulico">Ingeniero hidráulico</label>
+    <header>
+        <nav>
+            <a href="https://gaip.mx" target="_blank" ><img class= logo src="src/logo.png" alt="" ></a>
+        </nav>
+    </header>
+    <div class="container">
+        <div id="hidraulico">
+            <label for="hidraulico">Ingeniero hidráulico</label>
+        </div>
+        <div id="estructurista">
+            <label for="estructurista">Ingeniero estructurista</label>
+        </div>
+        <div id="admin">
+            <label for="administrativo">Administrativo</label>
+        </div>
+        <div id="becario">
+            <label for="becario">Becario</label>
+        </div>
     </div>
-    <div>
-        <label for="estructurista">Ingeniero estructurista</label>
-    </div>
-    <div>
-        <label for="administrativo">Administrativo</label>
-    </div>
+    <script>
+        var myHidraulic = document.getElementById('hidraulico');
+
+        myHidraulic.addEventListener('click', function() {
+          window.location.href = 'form.html';
+        });
+        
+        var myStructure = document.getElementById('estructurista');
+
+        myStructure.addEventListener('click', function() {
+          window.location.href = 'form.html';
+        });
+
+        var myAdmin = document.getElementById('admin');
+
+        myAdmin.addEventListener('click', function() {
+          window.location.href = 'form.html';
+        });
+
+        var myBeca = document.getElementById('becario');
+
+        myBeca.addEventListener('click', function() {
+          window.location.href = 'form.html';
+        });
+    </script>
 </body>
 </html>

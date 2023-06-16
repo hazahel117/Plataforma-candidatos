@@ -20,3 +20,4 @@ function mostrarPreguntas() {
     var preguntaMostrar = document.getElementById(opcionSeleccionada + "_pregunta");
     preguntaMostrar.style.display = "block";
 }
+
