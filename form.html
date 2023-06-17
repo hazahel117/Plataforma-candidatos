@@ -8,13 +8,14 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-        
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     </head>
     <body>
-        <nav>
-            
+        <header>
             <a href="https://gaip.mx" target="_blank" ><img class= logo src="src/logo.png" alt="" ></a>
-        </nav>
+        </header>
         <div class="container">
             <h1>Datos </h1>
             <form method="post">
@@ -30,26 +31,26 @@
                 <label for="edad">Edad:</label>
                 <input type="number" id="edad" name="edad"  min="18" max="80" required>
                 
-                <label for="hijos">Casado</label>
-                <select id="opciones" name="opciones">
-                    <option value="opcion1">Sí</option>
-                    <option value="opcion2">No</option>
+                <label for="casado">Casado</label>
+                <select id="casado" name="opciones">
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
                 </select>
                 <label for="hijos">Con hijos</label>
-                <select id="opciones" name="opciones">
-                    <option value="opcion1">Sí</option>
-                    <option value="opcion2">No</option>
+                <select id="hijos" name="opciones">
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
                 </select>
                 <label for="hijos">Titulado y con cédula</label>
-                <select id="opciones" name="opciones">
-                    <option value="opcion1">Sí</option>
-                    <option value="opcion2">No</option>
+                <select id="titulado" name="opciones">
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
                 </select>
                 
                 <label for="">Especialidad:</label>
                 <select id="especialidades" name="especialidades" onchange="mostrarPreguntas()">
-                    <option value="opcion1">Ingeniero Hidráulico</option>
-                    <option value="opcion2">Ingeniero Estructurista</option>
+                    <option value="Ingeniero Hidráulico">Ingeniero Hidráulico</option>
+                    <option value="Ingeniero Estructurista">Ingeniero Estructurista</option>
                 </select>
 
 
@@ -66,10 +67,10 @@
 
                 <label for="opciones">Manejo de Autocad:</label>
                 <select id="opciones" name="opciones">
-                    <option value="opcion1">Nulo</option>
-                    <option value="opcion2">Básico</option>
-                    <option value="opcion3">Medio</option>
-                    <option value="opcion4">Avanzado</option>
+                    <option value="Nulo">Nulo</option>
+                    <option value="Básico">Básico</option>
+                    <option value="Medio">Medio</option>
+                    <option value="Avanzado">Avanzado</option>
                 </select>
 
                 <label for="price">Expectativa económica </label>
@@ -78,11 +79,14 @@
 
                 <label for="archivo">Ingrese su currículum vitae:</label>
                 <input type="file" id="archivo" name="archivo" accept="application/pdf">
-
-                <input type="submit" value="Enviar">
+                
+                
+                <a class="boton" href="#" onclick= "guardar()">Enviar</a>
             </form>
           </div>
           <script src="./index.js"></script>
+          <script src="./configuration.js"></script>
+          <script src="./guardar.js"></script>
     </body>
 </html>
 
