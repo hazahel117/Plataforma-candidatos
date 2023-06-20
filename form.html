@@ -18,7 +18,7 @@
         </header>
         <div class="container">
             <h1>Datos </h1>
-            <form method="post">
+            <form  method="post" id="formulario">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
                 
@@ -30,6 +30,12 @@
                 
                 <label for="edad">Edad:</label>
                 <input type="number" id="edad" name="edad"  min="18" max="80" required>
+
+                <label for="licenciatura">Licenciatura:</label>
+                <input type="text" id="licenciatura" name="licenciatura" required>
+
+                <label for="experiencia">Experiencia (Años):</label>
+                <input type="number" id="experiencia" name="experiencia"  min="1" max="80" required>
                 
                 <label for="casado">Casado</label>
                 <select id="casado" name="opciones">
@@ -80,8 +86,8 @@
                 <label for="archivo">Ingrese su currículum vitae:</label>
                 <input type="file" id="archivo" name="archivo" accept="application/pdf">
                 
-                
-                <a class="boton" href="#" onclick= "guardar()">Enviar</a>
+                <input type="submit" name="enviar" class="boton" value="Enviar">
+                <!--<a class="boton" href="#" onclick= "guardar()">Enviar</a>-->
             </form>
           </div>
           <script src="./index.js"></script>

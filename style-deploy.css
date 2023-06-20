@@ -1,11 +1,21 @@
+#tablaDatos {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  #tablaDatos th, #tablaDatos td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
 #container {
     background-color: #eee;
-    padding: 20px;
     border: 3px solid #e5e5e5;
     border-radius: 5px;
     display: flex;
     flex-wrap: wrap;
-    display: flex;
+    display: none;
+    margin: 1em;
 }
 #container p{
     height: 50px; 
