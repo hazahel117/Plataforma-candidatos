@@ -47,13 +47,15 @@
                     <option value="Sí">Sí</option>
                     <option value="No">No</option>
                 </select>
-                <label for="hijos">Titulado y con cédula</label>
+                <label for="titulado">Titulado</label>
                 <select id="titulado" name="opciones">
                     <option value="Sí">Sí</option>
                     <option value="No">No</option>
                 </select>
+                <label for="cedula">Cédula <b>(Si no se tiene, poner 0):</b></label>
+                <input type="number" id="experiencia" name="experiencia"  min="0" max="9999999999" required>
                 
-                <label for="">Especialidad:</label>
+                <label for="especialidad">Especialidad:</label>
                 <select id="especialidades" name="especialidades" onchange="mostrarPreguntas()">
                     <option value="Ingeniero Hidráulico">Ingeniero Hidráulico</option>
                     <option value="Ingeniero Estructurista">Ingeniero Estructurista</option>
@@ -93,7 +95,7 @@
           <script src="./index.js"></script>
           <script src="./configuration.js"></script>
           <script src="./guardar.js"></script>
-    </body>
+        </body>
 </html>
 
 </body>

@@ -28,3 +28,5 @@ firebase.initializeApp({
 
 var db = firebase.firestore();
 
+const auth = firebase.auth();
+
