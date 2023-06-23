@@ -1,3 +1,18 @@
+nav{
+  display: flex;
+}
+#logout, #login{
+  justify-content: right;
+  background-color: rgb(227, 238, 255);
+  border-radius: 10%;
+  width: 55px;
+  text-align: center;
+}
+#logout1 h2{
+ text-align: center;
+ margin: 3em;
+}
+
 #buscador, #input-nombre {
   width: 35%;
   display: block;
