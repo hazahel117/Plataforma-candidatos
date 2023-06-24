@@ -12,7 +12,7 @@ var cuerpoTabla = document.getElementById('tabla-body');
 var tabla = document.getElementById('tablaDatos');
 var filas = tabla.getElementsByTagName('tr');
 
-var columnas = ['nombre', 'especialidad', 'email', 'telefono','edad','casado','hijos','titulado','años_experiencia'];
+var columnas = ['nombre', 'especialidad', 'email', 'telefono','edad','licenciatura','años_experiencia','casado','hijos','titulado','cedula','manejo_autocad','expectativa_economica'];
 
 //variable que almacena la referencia de la colección 
 //var collecRef = db.collection("users");
@@ -20,6 +20,7 @@ var columnas = ['nombre', 'especialidad', 'email', 'telefono','edad','casado','h
 
 
 var seleccion = document.getElementById('buscador');
+//seleccion.addEventListener('change',varLeerDatos);
 var buscarNombre = document.getElementById('input-nombre');
 var nombreBuscar = document.getElementById("buscar-nombre");
 
@@ -53,14 +54,17 @@ logout.addEventListener('click', e => {
     });
 });
 
-var leerDatos = function(){
+
+function leerDatos(){
+    
     var filasLength = filas.length;
     for (var i = filasLength - 1; i > 0; i--) {
         tabla.deleteRow(i);
     }
     var opcSeleccionada = seleccion.value;
+    
     if (opcSeleccionada == "Todos"){
-        db.collection("users").orderBy("nombre").get().then(function(querySnapshot){
+        db.collection("candidatos").orderBy("nombre").get().then(function(querySnapshot){
             querySnapshot.forEach(function(doc){
                 var datos = doc.data();
                 console.log(doc.id, " => ", doc.data());
@@ -69,7 +73,7 @@ var leerDatos = function(){
             });
         });
     }else{
-        db.collection("users").where("especialidad", "==", opcSeleccionada).get().then(function(querySnapshot){
+        db.collection("candidatos").where("especialidad", "==", opcSeleccionada).get().then(function(querySnapshot){
             querySnapshot.forEach(function(doc){
                 var datos = doc.data();
                 mostrar(datos);
@@ -77,22 +81,21 @@ var leerDatos = function(){
         });
     }
 }
+//var varLeerDatos = leerDatos();
 
 auth.onAuthStateChanged(user =>{
     if(user){
         mostrarInfo();
 
-        seleccion.addEventListener('change',leerDatos);
-
+        //seleccion.addEventListener('change',varLeerDatos);
         //nombreBuscar.addEventListener('click', buscar());
+        seleccion.addEventListener('change',leerDatos);
 
         console.log('signin');
     }else{
         ocultarInfo();
-        seleccion.removeEventListener('change',leerDatos());
+        seleccion.removeEventListener('change',leerDatos);
         console.log('signout');
-        
-        
     }
 });
 
@@ -127,6 +130,24 @@ function mostrar(datos){
     
 }
 
+function buscarTituloCedula(){
+    var nombreABuscar = document.getElementById("input-nombre").value;
+    var filasLength = filas.length;
+    for (var i = filasLength - 1; i > 0; i--) {
+        console.log(i)
+        tabla.deleteRow(i);
+    }
+    db.collection("candidatos")
+    .where("titulado","==", "Sí")
+    .where("cedula","!=", "0")
+    .get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+            var datos = doc.data();
+            mostrar(datos);
+            console.log("Buscando con titulo y cedula")
+        });
+    });
+}
 
 function buscar(){
     console.log('buscando');
@@ -137,15 +158,13 @@ function buscar(){
         tabla.deleteRow(i);
     }
 
-    db.collection("users")
+    db.collection("candidatos")
     .where("nombre","==", nombreABuscar)
     //.where("nombre","<",nombreABuscar)
     .get().then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
             var datos = doc.data();
-            
             mostrar(datos);
-            
         });
     });
 }

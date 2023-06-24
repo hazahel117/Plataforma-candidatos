@@ -18,7 +18,6 @@
 </head>
 
 <body>
-    </header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand" href="https://gaip.mx" target="_blank"><img class= logo src="src/logo.png" alt="" ></a>
@@ -26,7 +25,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav justify-content-end navbar-nav-custom">
             <li class="nav-item">
               <a id="login" class="nav-link active" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar</a>
             </li>
@@ -45,24 +44,29 @@
         <option value="Todos">Todos</option>
         <option value="Ingeniero Hidráulico">Ingeniero Hidráulico</option>
         <option value="Ingeniero Estructurista">Ingeniero Estructurista</option>
-    </select>
-    <input id="input-nombre" type="text">
-    <button id="buscar-nombre" onclick="buscar()">Buscar nombre</button>
+      </select>
+      <button id="tituloCedula" onclick="buscarTituloCedula()">Mostrar los que tienen título y cédula</button>
+      <input id="input-nombre" type="text">
+      <button id="buscar-nombre" onclick="buscar()">Buscar nombre</button>
     </div>
 
     <div id="tabla-container">
       <table id="tablaDatos">
         <thead>
           <tr>
-            <th id="mostrar-nombre">Nombre</th>
-            <th id="mostrar-especialidad">Especialidad</th>
-            <th id="mostrar-email">Correo</th>
-            <th id="mostrar-telefono">Telefono</th>
-            <th id="mostrar-edad">Edad</th>
-            <th id="mostrar-casado">Casado</th>
-            <th id="mostrar-hijos">Hijos</th>
-            <th id="mostrar-titulado">Titulado</th>
-            <th id="mostrar-experiencia">Experiencia</th>
+            <th>Nombre</th>
+            <th>Especialidad</th>
+            <th>Correo</th>
+            <th>Telefono</th>
+            <th>Edad</th>
+            <th>Licenciatura</th>
+            <th>Experiencia</th>
+            <th>Casado</th>
+            <th>Hijos</th>
+            <th>Titulado</th>
+            <th>Cédula</th>
+            <th>Manejo Autocad</th>
+            <th>Expectativa económica</th>
           </tr>
         </thead>
         <tbody id="tabla-body">

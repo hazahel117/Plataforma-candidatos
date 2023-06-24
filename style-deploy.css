@@ -1,26 +1,30 @@
-nav{
-  display: flex;
+
+.navbar-nav-custom {
+  margin-left: auto;
+  margin-right: 5px;
 }
+
 #logout, #login{
-  justify-content: right;
+  justify-content: flex-end !important;
   background-color: rgb(227, 238, 255);
   border-radius: 10%;
-  width: 55px;
+  width: 70;
   text-align: center;
+  
 }
 #logout1 h2{
  text-align: center;
  margin: 3em;
 }
 
-#buscador, #input-nombre {
+#buscador, #input-nombre{
   width: 35%;
   display: block;
   margin: 20px auto;
   font-family: 'Quicksand', sans-serif;
   font-weight:bold;
 }
-#buscar-nombre{
+#buscar-nombre, #tituloCedula{
   display: block;
   margin: 0 auto 50px;
   width: 140px;
@@ -28,6 +32,7 @@ nav{
   font-size: 1em;
   padding: 7px; 
 }
+
 
 #tablaDatos {
     width: 100%;

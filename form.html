@@ -35,7 +35,7 @@
                 <input type="text" id="licenciatura" name="licenciatura" required>
 
                 <label for="experiencia">Experiencia (Años):</label>
-                <input type="number" id="experiencia" name="experiencia"  min="1" max="80" required>
+                <input type="number" id="experiencia" name="experiencia"  min="0" max="80" required>
                 
                 <label for="casado">Casado</label>
                 <select id="casado" name="opciones">
@@ -52,10 +52,10 @@
                     <option value="Sí">Sí</option>
                     <option value="No">No</option>
                 </select>
-                <label for="cedula">Cédula <b>(Si no se tiene, poner 0):</b></label>
-                <input type="number" id="experiencia" name="experiencia"  min="0" max="9999999999" required>
+                <label for="cedula">Número de Cédula <b>(Si no se tiene, poner 0):</b></label>
+                <input type="number" id="cedula" name="cedula"  min="0" max="9999999999" required>
                 
-                <label for="especialidad">Especialidad:</label>
+                <label for="especialidad">Vacante:</label>
                 <select id="especialidades" name="especialidades" onchange="mostrarPreguntas()">
                     <option value="Ingeniero Hidráulico">Ingeniero Hidráulico</option>
                     <option value="Ingeniero Estructurista">Ingeniero Estructurista</option>
