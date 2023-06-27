@@ -1,8 +1,34 @@
-document.getElementById("formulario").addEventListener("submit", function(event){
+
+let form =document.getElementById("formulario")
+form.addEventListener("submit", function(event){
     event.preventDefault();
-    guardar();
+    //guardar();
+    let fileInput = form.querySelector("#archivo");
+    let file = fileInput.files[0];
+    
+    publish({file});
 });
 
+const addDoc = async({ collection, data }) =>{
+    //Una colección
+    let collectionRef = firebase.firestore().collection(collection);
+    //Guardar el documento
+    collectionRef.add(data);
+}
+
+const upload = async ({ file }) =>{
+    //Referencia al espacio en el bucket donde estará el archivo
+    let storageRef = firebase.storage().ref().child(`archivos/${file.name}`);
+    //Subir el archivo
+    await storageRef.put(file);
+    //Retornar la referencia
+    return storageRef;
+}
+
+const publish = async({ file }) => {
+    let storageRef = await upload({file});
+    return addDoc({ collection: 'files', data: {path: storageRef.fullPath}})
+}
 
 function guardar(){
     var ver_tel = parseInt(document.getElementById("telefono").value)

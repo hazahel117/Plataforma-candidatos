@@ -22,7 +22,8 @@ var columnas = ['nombre', 'especialidad', 'email', 'telefono','edad','licenciatu
 var seleccion = document.getElementById('buscador');
 //seleccion.addEventListener('change',varLeerDatos);
 var buscarNombre = document.getElementById('input-nombre');
-var nombreBuscar = document.getElementById("buscar-nombre");
+var nombreBuscar = document.getElementById('buscar-nombre');
+var buscarTitCed = document.getElementById('tituloCedula');
 
 const ingresarForm = document.querySelector('#ingresar-form');
 
@@ -54,6 +55,22 @@ logout.addEventListener('click', e => {
     });
 });
 
+async function queryFiles(){
+    db.collection("files").get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+            var datos = doc.data();
+            console.log(datos);
+            downloadPdf(datos)
+            
+        });
+    });
+}
+queryFiles();
+
+async function downloadPdf (docData){
+    let url = await firebase.storage().ref(docData.path).getDownloadURL();
+    console.log(url);
+}
 
 function leerDatos(){
     
@@ -90,11 +107,14 @@ auth.onAuthStateChanged(user =>{
         //seleccion.addEventListener('change',varLeerDatos);
         //nombreBuscar.addEventListener('click', buscar());
         seleccion.addEventListener('change',leerDatos);
-
+        buscarTitCed.addEventListener('click', buscarTituloCedula);
+        nombreBuscar.addEventListener('click',buscar);
         console.log('signin');
     }else{
         ocultarInfo();
         seleccion.removeEventListener('change',leerDatos);
+        buscarTitCed.removeEventListener('click', buscarTituloCedula);
+        nombreBuscar.removeEventListener('click',buscar);
         console.log('signout');
     }
 });

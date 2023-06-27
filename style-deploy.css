@@ -24,7 +24,7 @@
   font-family: 'Quicksand', sans-serif;
   font-weight:bold;
 }
-#buscar-nombre, #tituloCedula{
+#buscar-nombre{
   display: block;
   margin: 0 auto 50px;
   width: 140px;
@@ -33,6 +33,14 @@
   padding: 7px; 
 }
 
+#tituloCedula{
+  display: block;
+  margin: 0 auto 50px;
+  width: 17%;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1em;
+  padding: 7px; 
+}
 
 #tablaDatos {
     width: 100%;

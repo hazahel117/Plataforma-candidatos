@@ -18,7 +18,7 @@ body {
   }
   .container {
     max-width: 65%;
-    margin: 8.5em auto;
+    margin: 10vh auto;
     background-color: #eee;
     padding: 20px;
     border: 3px solid #e5e5e5;
@@ -39,6 +39,7 @@ body {
     justify-content: center;
     flex-grow: 1;
     max-width: 30%;
+    min-width: 150px;
   }
   .container div:hover{
     background: #e1e1e1;
