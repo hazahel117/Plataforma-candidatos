@@ -2,23 +2,23 @@
 let form =document.getElementById("formulario")
 form.addEventListener("submit", function(event){
     event.preventDefault();
-    //guardar();
-    let fileInput = form.querySelector("#archivo");
-    let file = fileInput.files[0];
-    
-    publish({file});
+    guardar();
 });
 
-const addDoc = async({ collection, data }) =>{
+/*const addDoc = async({ collection, data }) =>{
     //Una colección
     let collectionRef = firebase.firestore().collection(collection);
     //Guardar el documento
     collectionRef.add(data);
-}
+}*/
 
 const upload = async ({ file }) =>{
+    let timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    console.log(timestamp);
+    let nombreUnico = `${timestamp}_${file.name}`;
+    console.log(nombreUnico);
     //Referencia al espacio en el bucket donde estará el archivo
-    let storageRef = firebase.storage().ref().child(`archivos/${file.name}`);
+    let storageRef = firebase.storage().ref().child(`archivos/${nombreUnico}`);
     //Subir el archivo
     await storageRef.put(file);
     //Retornar la referencia
@@ -27,10 +27,11 @@ const upload = async ({ file }) =>{
 
 const publish = async({ file }) => {
     let storageRef = await upload({file});
-    return addDoc({ collection: 'files', data: {path: storageRef.fullPath}})
+    return storageRef.fullPath;
+    //return addDoc({ collection: 'users', data: {path: storageRef.fullPath}})
 }
 
-function guardar(){
+async function guardar(){
     var ver_tel = parseInt(document.getElementById("telefono").value)
     var ver_edad = parseInt(document.getElementById("edad").value)
     var ver_experiencia = parseInt(document.getElementById("experiencia").value)
@@ -43,32 +44,45 @@ function guardar(){
         && document.getElementById("licenciatura").value
         && document.getElementById("experiencia").value && !isNaN(ver_experiencia)
         && document.getElementById("experiencia").value && !isNaN(ver_cedula)){
-            db.collection("candidatos").add({
-                nombre: document.getElementById("nombre").value,
-                email: document.getElementById("email").value,
-                telefono: document.getElementById("telefono").value,
-                edad: document.getElementById("edad").value,
-                licenciatura: document.getElementById("licenciatura").value,
-                años_experiencia: document.getElementById("experiencia").value,
-                casado: document.getElementById("casado").value,
-                hijos: document.getElementById("hijos").value,
-                titulado: document.getElementById("titulado").value,
-                cedula: document.getElementById("cedula").value,
-                especialidad: document.getElementById("especialidades").value,
-                manejo_autocad: document.getElementById("opciones").value,
-                expectativa_economica: document.getElementById("price").value
-            })
-            .then((docRef) => {
-                alert("Registro exitoso")
-                document.getElementById("formulario").reset();
-                window.location.href = "#";
-            })
-            .catch((error) => {
-                console.error("Error adding document: ", error);
-                alert("Ocurrió un error en el registro")
-            });
+
+            let fileInput = form.querySelector("#archivo");
+            let file = fileInput.files[0];
+            
+            try{
+                let path = await publish({ file });
+                db.collection("candidatos").add({
+                    nombre: document.getElementById("nombre").value,
+                    email: document.getElementById("email").value,
+                    telefono: document.getElementById("telefono").value,
+                    edad: document.getElementById("edad").value,
+                    licenciatura: document.getElementById("licenciatura").value,
+                    años_experiencia: document.getElementById("experiencia").value,
+                    casado: document.getElementById("casado").value,
+                    hijos: document.getElementById("hijos").value,
+                    titulado: document.getElementById("titulado").value,
+                    cedula: document.getElementById("cedula").value,
+                    especialidad: document.getElementById("especialidades").value,
+                    manejo_autocad: document.getElementById("opciones").value,
+                    expectativa_economica: document.getElementById("price").value,
+                    path: path
+                })
+                .then((docRef) => {
+                    alert("Registro exitoso")
+                    document.getElementById("formulario").reset();
+                    window.location.href = "#";
+                })
+                .catch((error) => {
+                    console.error("Error adding document: ", error);
+                    alert("Ocurrió un error en el registro")
+                });
+            } catch (error) {
+                console.error("Error uploading file: ", error);
+                alert("Ocurrió un error al subir el archivo");
+              }
+            
+            
         } else{
-            alert("Información inválida")
+            alert("Información inválida");
         }
     
 }

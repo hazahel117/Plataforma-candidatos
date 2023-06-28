@@ -12,7 +12,7 @@ var cuerpoTabla = document.getElementById('tabla-body');
 var tabla = document.getElementById('tablaDatos');
 var filas = tabla.getElementsByTagName('tr');
 
-var columnas = ['nombre', 'especialidad', 'email', 'telefono','edad','licenciatura','años_experiencia','casado','hijos','titulado','cedula','manejo_autocad','expectativa_economica'];
+var columnas = ['nombre', 'especialidad', 'email', 'telefono','edad','licenciatura','años_experiencia','casado','hijos','titulado','cedula','manejo_autocad','expectativa_economica','path'];
 
 //variable que almacena la referencia de la colección 
 //var collecRef = db.collection("users");
@@ -59,17 +59,18 @@ async function queryFiles(){
     db.collection("files").get().then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
             var datos = doc.data();
-            console.log(datos);
-            downloadPdf(datos)
-            
+            //console.log(datos);
+            downloadPdf(datos);
         });
     });
+    //return downloadPdf(datos);
 }
-queryFiles();
+//queryFiles();
 
 async function downloadPdf (docData){
     let url = await firebase.storage().ref(docData.path).getDownloadURL();
-    console.log(url);
+    //console.log(url);
+    return url;
 }
 
 function leerDatos(){
@@ -139,17 +140,29 @@ function mostrar(datos){
     for (var i = 0; i < columnas.length; i++) {
         var columna = columnas[i];
         var celda = fila.insertCell();
-        celda.innerHTML = datos[columna];
+        
+        if (columna == 'path'){
+            downloadPdf(datos)
+                .then((url) =>{
+                    console.log(url);
+                    celda.innerHTML = `<a href=${url} target="_blank">CV</a>`
+                })
+                .catch((error) =>{
+                    console.error(error);
+                });
+        }else{
+            celda.innerHTML = datos[columna];
+        }
     }
-    /*db.collection("users").get().then((querySnapshot) => {
+    
+    
+}
+/*db.collection("users").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             //doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
         });
     });*/
-    
-}
-
 function buscarTituloCedula(){
     var nombreABuscar = document.getElementById("input-nombre").value;
     var filasLength = filas.length;
