@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Candidatos</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,7 @@
         <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+        <link rel="shortcut icon" href="src/icon.png">
     </head>
     <body>
         <header>
@@ -87,7 +88,7 @@
                 <output class="price-output" for="price"></output>
 
                 <label for="archivo">Ingrese su currículum vitae:</label>
-                <input type="file" id="archivo" name="archivo" accept="application/pdf">
+                <input type="file" id="archivo" name="archivo" required>
                 
                 <input type="submit" name="enviar" class="boton" value="Enviar">
                 <!--<a class="boton" href="#" onclick= "guardar()">Enviar</a>-->

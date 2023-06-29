@@ -104,7 +104,7 @@ function leerDatos(){
 auth.onAuthStateChanged(user =>{
     if(user){
         mostrarInfo();
-
+        leerDatos();
         //seleccion.addEventListener('change',varLeerDatos);
         //nombreBuscar.addEventListener('click', buscar());
         seleccion.addEventListener('change',leerDatos);

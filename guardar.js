@@ -13,9 +13,10 @@ form.addEventListener("submit", function(event){
 }*/
 
 const upload = async ({ file }) =>{
-    let timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    let timestamp = Date.now();
     console.log(timestamp);
-    let nombreUnico = `${timestamp}_${file.name}`;
+    nombre = document.getElementById("nombre").value;
+    let nombreUnico = `${timestamp}_${nombre}`;
     console.log(nombreUnico);
     //Referencia al espacio en el bucket donde estará el archivo
     let storageRef = firebase.storage().ref().child(`archivos/${nombreUnico}`);
@@ -64,7 +65,8 @@ async function guardar(){
                     especialidad: document.getElementById("especialidades").value,
                     manejo_autocad: document.getElementById("opciones").value,
                     expectativa_economica: document.getElementById("price").value,
-                    path: path
+                    path: path,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 })
                 .then((docRef) => {
                     alert("Registro exitoso")
