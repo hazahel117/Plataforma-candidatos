@@ -12,7 +12,7 @@ var cuerpoTabla = document.getElementById('tabla-body');
 var tabla = document.getElementById('tablaDatos');
 var filas = tabla.getElementsByTagName('tr');
 
-var columnas = ['nombre', 'especialidad', 'email', 'telefono','edad','licenciatura','años_experiencia','casado','hijos','titulado','cedula','manejo_autocad','expectativa_economica','path'];
+var columnas = ['#','nombre', 'especialidad', 'email', 'telefono','edad','licenciatura','años_experiencia','casado','hijos','titulado','cedula','manejo_autocad','expectativa_economica','path'];
 
 //variable que almacena la referencia de la colección 
 //var collecRef = db.collection("users");
@@ -24,6 +24,24 @@ var seleccion = document.getElementById('buscador');
 var buscarNombre = document.getElementById('input-nombre');
 var nombreBuscar = document.getElementById('buscar-nombre');
 var buscarTitCed = document.getElementById('tituloCedula');
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            
+    let vacantes = document.getElementById('buscador');
+    let html=`<option value="Todos">Todos</option>`
+    db.collection("vacantes").get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+            var datos = doc.data();
+            console.log(datos.nombre);
+            html +=`<option value="${datos.nombre}">
+                    ${datos.nombre}
+                </option>`;
+        });
+        vacantes.innerHTML = html;
+    });
+});
+
 
 const ingresarForm = document.querySelector('#ingresar-form');
 
@@ -74,7 +92,7 @@ async function downloadPdf (docData){
 }
 
 function leerDatos(){
-    
+    numCandidatos =1;
     var filasLength = filas.length;
     for (var i = filasLength - 1; i > 0; i--) {
         tabla.deleteRow(i);
@@ -135,13 +153,14 @@ auth.onAuthStateChanged(user =>{
 function mostrar(datos){
 
     var fila = tabla.insertRow();
-
+    
     
     for (var i = 0; i < columnas.length; i++) {
         var columna = columnas[i];
         var celda = fila.insertCell();
-        
-        if (columna == 'path'){
+        if (columna == '#'){
+            celda.innerHTML = numCandidatos;
+        }else if (columna == 'path'){
             downloadPdf(datos)
                 .then((url) =>{
                     console.log(url);
@@ -153,8 +172,9 @@ function mostrar(datos){
         }else{
             celda.innerHTML = datos[columna];
         }
+        
     }
-    
+    numCandidatos ++;
     
 }
 /*db.collection("users").get().then((querySnapshot) => {
@@ -164,27 +184,44 @@ function mostrar(datos){
         });
     });*/
 function buscarTituloCedula(){
-    var nombreABuscar = document.getElementById("input-nombre").value;
+    opcSeleccionada = seleccion.value;
     var filasLength = filas.length;
+    numCandidatos =1;
     for (var i = filasLength - 1; i > 0; i--) {
         console.log(i)
         tabla.deleteRow(i);
     }
-    db.collection("candidatos")
-    .where("titulado","==", "Sí")
-    .where("cedula","!=", "0")
-    .get().then(function(querySnapshot){
-        querySnapshot.forEach(function(doc){
-            var datos = doc.data();
-            mostrar(datos);
-            console.log("Buscando con titulo y cedula")
+    if (opcSeleccionada == "Todos"){
+        db.collection("candidatos")
+        .where("titulado","==", "Sí")
+        .where("cedula","!=", "0")
+        .get().then(function(querySnapshot){
+            querySnapshot.forEach(function(doc){
+                var datos = doc.data();
+                mostrar(datos);
+                console.log("Buscando con titulo y cedula")
+            });
         });
-    });
+    }else{
+        db.collection("candidatos")
+        .where("especialidad", "==", opcSeleccionada)
+        .where("titulado","==", "Sí")
+        .where("cedula","!=", "0")
+        .get().then(function(querySnapshot){
+            querySnapshot.forEach(function(doc){
+                var datos = doc.data();
+                mostrar(datos);
+                console.log("Buscando con titulo y cedula")
+            });
+        });
+    }
+    
 }
 
 function buscar(){
     console.log('buscando');
     var nombreABuscar = document.getElementById("input-nombre").value;
+    numCandidatos =1;
     var filasLength = filas.length;
     for (var i = filasLength - 1; i > 0; i--) {
         console.log(i)

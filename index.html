@@ -6,6 +6,9 @@
     <link rel="stylesheet" type="text/css" href="style2.css">
     
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <link rel="shortcut icon" href="src/icon.png">
     <title>Candidatos</title>
 </head>
@@ -15,46 +18,44 @@
             <a href="https://gaip.mx" target="_blank" ><img class= logo src="src/logo.png" alt="" ></a>
         </nav>
     </header>
-    <section class="title">
-        <h1>Bolsa de trabajo</h1>
-    </section>
-    <section class="container">
-        <div id="hidraulico">
-            <label for="hidraulico">Ingeniero hidráulico</label>
-        </div>
-        <div id="estructurista">
-            <label for="estructurista">Ingeniero estructurista</label>
-        </div>
-        <div id="admin">
-            <label for="administrativo">Administrativo</label>
-        </div>
-        <div id="becario">
-            <label for="becario">Becario</label>
-        </div>
-    </section>
+    <div class="flexbox">
+        <section class="title">
+            <h1>Bolsa de trabajo</h1>
+        </section>
+        <section id="container">
+        </section>
+    </div>
+    
+    
+    
+    <script src="./configuration.js"></script>
     <script>
-        var myHidraulic = document.getElementById('hidraulico');
-
-        myHidraulic.addEventListener('click', function() {
-          window.location.href = 'form.html';
-        });
         
-        var myStructure = document.getElementById('estructurista');
 
-        myStructure.addEventListener('click', function() {
-          window.location.href = 'form.html';
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            let container = document.getElementById('container');
+            let html=''
+            db.collection("vacantes").get().then(function(querySnapshot){
+                querySnapshot.forEach(function(doc){
+                    var datos = doc.data();
+                    console.log(datos.nombre);
+                    html +=`<div class='vacante'>
+                            <label>${datos.nombre}</label>
+                        </div>`;
+                });
+                container.innerHTML = html;
+                var buttons = document.getElementsByClassName('vacante');
 
-        var myAdmin = document.getElementById('admin');
+                var redirectToLink = function() {
+                    window.location.href = 'form.html';
+                    
+                };
 
-        myAdmin.addEventListener('click', function() {
-          window.location.href = 'form.html';
-        });
-
-        var myBeca = document.getElementById('becario');
-
-        myBeca.addEventListener('click', function() {
-          window.location.href = 'form.html';
+                for (var i = 0; i < buttons.length; i++) {
+                    buttons[i].addEventListener('click', redirectToLink);
+                }
+            });
         });
     </script>
 </body>

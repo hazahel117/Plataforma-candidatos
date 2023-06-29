@@ -5,6 +5,24 @@ form.addEventListener("submit", function(event){
     guardar();
 });
 
+
+document.addEventListener('DOMContentLoaded', function() {
+            
+    let vacantes = document.getElementById('especialidades');
+    let html=''
+    db.collection("vacantes").get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+            var datos = doc.data();
+            console.log(datos.nombre);
+            html +=`<option value="${datos.nombre}">
+                    ${datos.nombre}
+                </option>`;
+        });
+        vacantes.innerHTML = html;
+    });
+});
+
+
 /*const addDoc = async({ collection, data }) =>{
     //Una colección
     let collectionRef = firebase.firestore().collection(collection);

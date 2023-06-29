@@ -23,7 +23,7 @@ body {
     text-align: center;
     font-size: 2.7em;
   }
-  .container {
+  #container {
     max-width: 65%;
     margin: auto;
     background-color: #eee;
@@ -34,7 +34,7 @@ body {
     flex-wrap: wrap;
     justify-content: space-evenly;
   }
-  .container div {
+  .vacante {
     width: 30%;
     height: 200px; 
     background-color: #e5e5e5;
@@ -49,7 +49,7 @@ body {
     min-width: 170px;
     transition: all 0.4s;
   }
-  .container div:hover{
+  .vacante:hover{
     background: #666;
     transform: translateY(-10px);
     color: #f2f2ef;
