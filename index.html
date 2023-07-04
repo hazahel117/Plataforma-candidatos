@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style2.css">
     
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <link rel="shortcut icon" href="src/icon.png">
-    <title>Candidatos</title>
+    <title>Bolsa de trabajo</title>
 </head>
 <body>
     <header>
@@ -18,45 +20,41 @@
             <a href="https://gaip.mx" target="_blank" ><img class= logo src="src/logo.png" alt="" ></a>
         </nav>
     </header>
-    <div class="flexbox">
-        <section class="title">
-            <h1>Bolsa de trabajo</h1>
-        </section>
-        <section id="container">
-        </section>
+    <div class="fondo">
+        
+        <div class="flexbox">
+            <section class="title">
+                <svg>
+
+                    <!-- Symbol -->
+                    <symbol id="s-text">
+                      <text text-anchor="middle"
+                            x="50%" y="50%" dy=".35em">
+                        ¡Te estamos buscando!
+                      </text>
+                    </symbol>  
+                  
+                    <!-- Duplicate symbols -->
+                    <use xlink:href="#s-text" class="text"
+                         ></use>
+                    <use xlink:href="#s-text" class="text"
+                         ></use>
+                    <use xlink:href="#s-text" class="text"
+                         ></use>
+                    <use xlink:href="#s-text" class="text"
+                         ></use>
+                    <use xlink:href="#s-text" class="text"
+                         ></use>
+                  
+                  </svg>
+            </section>
+            <section id="container">
+            </section>
+        </div>
     </div>
     
     
-    
     <script src="./configuration.js"></script>
-    <script>
-        
-
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            let container = document.getElementById('container');
-            let html=''
-            db.collection("vacantes").get().then(function(querySnapshot){
-                querySnapshot.forEach(function(doc){
-                    var datos = doc.data();
-                    console.log(datos.nombre);
-                    html +=`<div class='vacante'>
-                            <label>${datos.nombre}</label>
-                        </div>`;
-                });
-                container.innerHTML = html;
-                var buttons = document.getElementsByClassName('vacante');
-
-                var redirectToLink = function() {
-                    window.location.href = 'form.html';
-                    
-                };
-
-                for (var i = 0; i < buttons.length; i++) {
-                    buttons[i].addEventListener('click', redirectToLink);
-                }
-            });
-        });
-    </script>
+    <script src="./index.js"></script>
 </body>
 </html>
